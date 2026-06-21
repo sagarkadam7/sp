@@ -61,6 +61,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  min-height: 100%;
+}
+
+main {
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body.menu-open {
@@ -327,11 +333,10 @@ ul {
 /* ---- Hero ---- */
 .hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh;
+  min-height: clamp(520px, 88vh, 780px);
   display: flex;
   align-items: center;
-  padding: calc(var(--header-height) + 48px) 0 100px;
+  padding: calc(var(--header-height) + 40px) 0 clamp(64px, 8vw, 88px);
   overflow: hidden;
 }
 
@@ -353,9 +358,53 @@ ul {
   opacity: 0.6;
 }
 
+.hero__wrapper {
+  display: grid;
+  grid-template-columns: 1fr min(340px, 34vw);
+  gap: clamp(24px, 4vw, 48px);
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
 .hero__content {
   color: var(--color-white);
   position: relative;
+  min-width: 0;
+}
+
+.hero__photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__photo-frame {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 3px solid rgba(201, 162, 39, 0.45);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.hero__photo-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(6, 31, 24, 0.35) 100%);
+  pointer-events: none;
+}
+
+.hero__photo-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
 }
 
 .hero__badge {
@@ -453,8 +502,13 @@ ul {
 
 /* ---- Sections ---- */
 .section {
-  padding: clamp(72px, 10vw, 120px) 0;
+  padding: clamp(56px, 7vw, 96px) 0;
   position: relative;
+}
+
+.section.contact {
+  padding-top: clamp(56px, 7vw, 88px);
+  padding-bottom: clamp(40px, 5vw, 64px);
 }
 
 .section--alt {
@@ -462,7 +516,7 @@ ul {
 }
 
 .section__header {
-  margin-bottom: clamp(40px, 6vw, 64px);
+  margin-bottom: clamp(32px, 5vw, 52px);
 }
 
 .section__header--center {
@@ -587,21 +641,23 @@ ul {
   background: linear-gradient(90deg, var(--color-accent), var(--color-primary-mid));
 }
 
-.about__avatar {
-  width: 108px;
-  height: 108px;
+.about__photo {
+  width: min(100%, 220px);
+  aspect-ratio: 3 / 4;
   margin: 0 auto 22px;
-  background: linear-gradient(145deg, var(--color-primary) 0%, var(--color-primary-mid) 100%);
-  color: var(--color-accent-light);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
-  font-weight: 600;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 3px solid rgba(201, 162, 39, 0.35);
   box-shadow: var(--shadow-md);
-  border: 3px solid rgba(201, 162, 39, 0.3);
+  background: var(--color-bg-alt);
+}
+
+.about__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  display: block;
 }
 
 .about__card-inner h3 {
@@ -1095,21 +1151,42 @@ ul {
 .contact__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(40px, 6vw, 72px);
-  align-items: start;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: stretch;
+}
+
+.contact__panel {
+  background: var(--color-bg-card);
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 4vw, 36px);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact__panel .section__tag {
+  margin-bottom: 10px;
+}
+
+.contact__panel .section__title {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  margin-bottom: 0;
 }
 
 .contact__info p {
   color: var(--color-text-muted);
-  margin: 16px 0 36px;
-  font-size: clamp(0.95rem, 2vw, 1.05rem);
-  line-height: 1.7;
+  margin: 14px 0 24px;
+  font-size: clamp(0.95rem, 2vw, 1.02rem);
+  line-height: 1.65;
 }
 
 .contact__details {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
+  margin-top: auto;
 }
 
 .contact__item {
@@ -1132,7 +1209,6 @@ ul {
 .contact__item--link:active {
   border-color: var(--color-primary-mid);
   box-shadow: var(--shadow-sm);
-  transform: translateX(4px);
 }
 
 .contact__item-icon {
@@ -1239,7 +1315,12 @@ ul {
 
 .form__group textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 110px;
+  max-height: 220px;
+}
+
+.contact__form .form__group:last-of-type {
+  margin-bottom: 22px;
 }
 
 .form__note {
@@ -1319,8 +1400,9 @@ ul {
 .footer {
   background: var(--color-primary-dark);
   color: rgba(255, 255, 255, 0.75);
-  padding: clamp(32px, 5vw, 48px) 0;
-  padding-bottom: calc(clamp(32px, 5vw, 48px) + env(safe-area-inset-bottom));
+  padding: clamp(28px, 4vw, 40px) 0;
+  padding-bottom: calc(clamp(28px, 4vw, 40px) + env(safe-area-inset-bottom));
+  margin-top: 0;
 }
 
 .footer__inner {
@@ -1357,6 +1439,20 @@ ul {
 
 /* ---- Responsive ---- */
 @media (max-width: 1024px) {
+  .hero__wrapper {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .hero__photo {
+    order: -1;
+  }
+
+  .hero__photo-frame {
+    max-width: 240px;
+    margin: 0 auto;
+  }
+
   .services__grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1559,9 +1655,10 @@ ul {
   }
 
   .hero {
-    padding-bottom: calc(80px + var(--mobile-bar-height));
-    align-items: flex-end;
-    min-height: 100svh;
+    min-height: auto;
+    padding-top: calc(var(--header-height) + 32px);
+    padding-bottom: calc(48px + var(--mobile-bar-height));
+    align-items: center;
   }
 
   .hero__actions {
@@ -1666,6 +1763,14 @@ ul {
     order: -1;
   }
 
+  .contact__panel {
+    padding: 24px 20px;
+  }
+
+  .section.contact {
+    padding-bottom: clamp(32px, 5vw, 48px);
+  }
+
   .footer__inner {
     flex-direction: column;
     text-align: center;
@@ -1685,15 +1790,28 @@ ul {
   }
 
   .section {
-    padding-bottom: calc(clamp(72px, 10vw, 100px) + var(--mobile-bar-height));
+    padding: clamp(48px, 8vw, 72px) 0;
+    padding-bottom: calc(clamp(48px, 8vw, 72px) + var(--mobile-bar-height));
+  }
+
+  .section.contact {
+    padding-bottom: clamp(40px, 6vw, 56px);
   }
 
   .section:last-of-type {
-    padding-bottom: clamp(72px, 10vw, 100px);
+    padding-bottom: clamp(40px, 6vw, 56px);
   }
 }
 
 @media (max-width: 480px) {
+  .about__photo {
+    width: min(100%, 200px);
+  }
+
+  .hero__photo-frame {
+    max-width: 220px;
+  }
+
   .hero__badge {
     font-size: 0.68rem;
     padding: 7px 14px;
