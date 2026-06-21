@@ -1,6 +1,6 @@
 # Satish Pawar — Professional Website
 
-A professional portfolio website for **Satish Pawar**, Society Auditor and Manager of **Janakalyan Pathsanstha, Vishrantwadi, Pune**.
+A professional portfolio website for **Satish Pawar**, Society Auditor in **Vishrantwadi, Pune**.
 
 ## Live Website
 
@@ -13,9 +13,9 @@ Repository: [github.com/sagarkadam7/sp](https://github.com/sagarkadam7/sp)
 - **Hero section** — Introduction and call-to-action
 - **About** — Background and credentials
 - **Services** — Society auditing and advisory services
-- **Organization** — Janakalyan Pathsanstha management role
-- **Experience** — Why clients choose you and how the process works
-- **Contact** — Phone, email, and inquiry form
+- **Reviews** — Client testimonials
+- **Experience** — Why societies trust the audit work
+- **Contact** — Phone and inquiry form
 
 ## View the Website
 
