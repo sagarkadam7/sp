@@ -63,6 +63,16 @@
     if (e.key === 'Escape') closeMenu();
   });
 
+  var reviewsTrack = document.getElementById('reviews-track');
+  if (reviewsTrack) {
+    var reviewsGroup = reviewsTrack.querySelector('.reviews__group');
+    if (reviewsGroup) {
+      var reviewsClone = reviewsGroup.cloneNode(true);
+      reviewsClone.setAttribute('aria-hidden', 'true');
+      reviewsTrack.appendChild(reviewsClone);
+    }
+  }
+
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -94,7 +104,7 @@
     });
 
     document.querySelectorAll(
-      '.service-card, .trust-item, .process__step, .org__feature, .about__highlights li, .review-card'
+      '.service-card, .trust-item, .org__feature, .about__highlights li'
     ).forEach(function (el) {
       el.classList.add('reveal');
       observer.observe(el);
