@@ -22,7 +22,7 @@ jobs:
       - name: Prepare site files
         run: |
           mkdir site
-          cp index.html styles.css script.js .nojekyll site/
+          cp index.html styles.css script.js favicon.svg .nojekyll site/
           cp -r images site/
 
       - name: Deploy to gh-pages branch
